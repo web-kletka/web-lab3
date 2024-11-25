@@ -30,7 +30,7 @@ public class FormBean implements Serializable {
     public String processRequest() {
         try {
             entityModel = checkerBean.getModel(x,y,r);
-//            entityModelService.saveModel(entityModel);
+            entityModelService.saveModel(entityModel);
         } catch (NumberFormatException e) {
             entityModel = null;
         }
@@ -38,8 +38,8 @@ public class FormBean implements Serializable {
     }
 
     public List<MyEntityModel> getRequestHistory() {
-        return null;
-//        return entityModelService.findAllUsers();
+//        return null;
+        return entityModelService.findAllUsers();
     }
 
     public String getResult(){
