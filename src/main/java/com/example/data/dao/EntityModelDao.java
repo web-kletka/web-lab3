@@ -18,6 +18,12 @@ public class EntityModelDao {
         return model;
     }
 
+    public void clear(){
+        em.getTransaction().begin();
+        em.createQuery("delete from MyEntityModel").executeUpdate();
+        em.getTransaction().commit();
+    }
+
     public void save(MyEntityModel model) {
         em.getTransaction().begin();
         em.persist(model);

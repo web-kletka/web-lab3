@@ -35,9 +35,18 @@ public class MyEntityModel {
     @Temporal(TemporalType.TIMESTAMP)
     private Date date;
 
+    @Transient
+    private String info;
+
+    public MyEntityModel(String info) {
+        this.info = info;
+    }
+
     public String getXyr(){
         return x + "," + y + "," + r;
     }
+
+
 
     @Override
     public String toString() {

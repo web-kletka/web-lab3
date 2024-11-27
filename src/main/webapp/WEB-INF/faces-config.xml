@@ -5,23 +5,22 @@
                                   https://jakarta.ee/xml/ns/jakartaee/web-facesconfig_3_0.xsd">
 
 
-<!--    <navigation-rule>-->
+    <navigation-rule>
+        <from-view-id>/main.xhtml</from-view-id>
+        <navigation-case>
+            <from-outcome>index</from-outcome>
+            <to-view-id>/index.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+    </navigation-rule>
 
-<!--        <from-view-id>/index.xhtml</from-view-id>-->
-<!--        <navigation-case>-->
-<!--            <from-outcome>main</from-outcome>-->
-<!--            <to-view-id>/main.xhtml</to-view-id>-->
-<!--            <redirect/>-->
-<!--        </navigation-case>-->
-<!--    </navigation-rule>-->
-
-<!--    <navigation-rule>-->
-<!--        <from-view-id>/main.xhtml</from-view-id>-->
-<!--        <navigation-case>-->
-<!--            <from-outcome>index</from-outcome>-->
-<!--            <to-view-id>/index.xhtml</to-view-id>-->
-<!--        </navigation-case>-->
-<!--    </navigation-rule>-->
+    <navigation-rule>
+        <from-view-id>/index.xhtml</from-view-id>
+        <navigation-case>
+            <from-outcome>main</from-outcome>
+            <to-view-id>/main.xhtml</to-view-id>
+        </navigation-case>
+    </navigation-rule>
 
     <managed-bean>
         <managed-bean-name>FormBean</managed-bean-name>

@@ -26,14 +26,11 @@ public class CheckerBean implements Serializable {
                 put("r", r);
             }});
             resultOfCalc = calculate(parsParamsService.getX(), parsParamsService.getY(), parsParamsService.getR());
-
-            if (resultOfCalc) result = "Попал";
-            else result = "Мимо";
-            return new MyEntityModel(0, parsParamsService.getX(), parsParamsService.getY(), parsParamsService.getR(), resultOfCalc, System.currentTimeMillis() - startTime, new Date());
+            return new MyEntityModel(0, parsParamsService.getX(), parsParamsService.getY(), parsParamsService.getR(), resultOfCalc, System.currentTimeMillis() - startTime, new Date(), "ok");
         } catch (
                 ValidException e) {
             result = e.getMessage();
-            return null;
+            return new MyEntityModel(result);
         }
     }
 

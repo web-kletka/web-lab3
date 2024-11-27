@@ -15,6 +15,8 @@ public class EntityModelService {
         entityModelDao.save(model);
     }
 
+    public void clearTable(){entityModelDao.clear();}
+
     public List<MyEntityModel> findAllUsers() {
         return entityModelDao.findAll();
     }

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE html>
+<html
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://xmlns.jcp.org/jsf/html
+                            http://xmlns.jcp.org/jsf/facelets
+                            http://xmlns.jcp.org/jsf/core "
+        xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:h="http://xmlns.jcp.org/jsf/html"
+        xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+        xmlns:f="http://xmlns.jcp.org/jsf/core"
+        xmlns:c="http://java.sun.com/jsp/jstl/core">
+
+<h:head>
+    <title>3 лаба</title>
+<!--    <link rel="stylesheet" href="style/index.css"/>-->
+    <link rel="stylesheet" href="style/main.css"/>
+</h:head>
+    <h:body>
+        <div class="header" style="font-family: fantasy">
+            <h1>Захарченко Роман Владимирович</h1>
+            <h2>Группа Р3231 / Вариант 666</h2>
+        </div>
+
+        <div class="content">
+            <div class="box">
+                <canvas id="clock" width="400px" height="400px"></canvas>
+            </div>
+            <h3 id = "date"/>
+        </div>
+        <div class="footer">
+            <h:form>
+                <h:commandButton class="button footer-box" value="Основная страница" action="index"/>
+            </h:form>
+        </div>
+        <script src = "js/clock.js"/>
+    </h:body>
+</html>
