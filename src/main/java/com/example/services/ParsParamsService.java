@@ -11,12 +11,19 @@ public class ParsParamsService {
     private Float y = null;
     private Float r = null;
 
-    public ParsParamsService(HashMap<String, String> map) throws ValidException {
-        Pars(map);
-        validParams();
+    public ParsParamsService(){
     }
 
-    private void Pars(HashMap<String, String> map){
+    public void pars(String x, String y, String r) throws ValidException  {
+        pars(new HashMap<>() {{
+            put("x", x);
+            put("y", y);
+            put("r", r);
+        }});
+    }
+
+
+    private void pars(HashMap<String, String> map){
 
         for (String key : map.keySet()) {
             switch (key) {

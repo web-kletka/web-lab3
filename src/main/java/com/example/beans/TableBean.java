@@ -4,7 +4,6 @@ import com.example.data.models.MyEntityModel;
 import com.example.services.EntityModelService;
 import jakarta.enterprise.context.SessionScoped;
 import jakarta.faces.context.FacesContext;
-import jakarta.inject.Inject;
 import jakarta.inject.Named;
 import lombok.Getter;
 import lombok.Setter;
@@ -12,33 +11,25 @@ import lombok.Setter;
 import java.io.IOException;
 import java.io.Serializable;
 import java.util.List;
-import java.util.Objects;
 
-@Named("FormBean")
+@Named("TableBean")
 @SessionScoped
 @Getter
 @Setter
-public class FormBean implements Serializable {
-    private String x;
-    private String y;
-    private String r;
+public class TableBean implements Serializable {
 
-    private boolean checkbox1;
-    private boolean checkbox2;
-    private boolean checkbox3;
-    private boolean checkbox4;
-    private boolean checkbox5;
+    private final EntityModelService entityModelService = new EntityModelService();
 
-    @Inject
-    private CheckerBean checkerBean;
-
-    public void processRequest() {
-        checkerBean.check(x,y,r);
-
+    public void clearTable(){
+        entityModelService.clearTable();
         try {
             FacesContext.getCurrentInstance().getExternalContext().redirect("index.xhtml");
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    public List<MyEntityModel> getRequestHistory() {
+        return entityModelService.findAllUsers();
     }
 }

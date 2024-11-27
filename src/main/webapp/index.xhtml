@@ -63,7 +63,7 @@
                 <h:commandButton value="Отправить" styleClass="button"
                                  action="#{FormBean.processRequest}" id="responseButton"/>
                 <div id="out_put_text" class="out_put_text" >
-                    <h:outputText id = "result_field" value="#{FormBean.result}"/>
+                    <h:outputText id = "result_field" value="#{CheckerBean.result}"/>
                 </div>
             </h:form>
 
@@ -75,7 +75,7 @@
                 <script>
                     let points = [];
                 </script>
-                <ui:repeat value="#{FormBean.requestHistory}" var="entry">
+                <ui:repeat value="#{TableBean.requestHistory}" var="entry">
                     <script>
                         // Добавляем объект с данными в массив points
                         points.push({x: #{entry.x}, y: #{entry.y}, color: '#{entry.result ? "green" : "red"}'});
@@ -84,7 +84,7 @@
                 <script>
                     console.log("points", points); // Здесь вы можете использовать points
                 </script>
-                <canvas id="graphCanvas" width="300" height="300"></canvas>
+                <canvas id="graphCanvas" width="300" height="300"/>
             </div>
 
 
@@ -101,7 +101,7 @@
                 </tr>
                 </thead>
                 <tbody id="myTBody">
-                <ui:repeat value="#{FormBean.requestHistory}" var="entry">
+                <ui:repeat value="#{TableBean.requestHistory}" var="entry">
                     <tr>
                         <td class="th"><h:outputText value="#{entry.xyr}"/></td>
                         <td class="th"><h:outputText value="#{entry.result}"/></td>
@@ -115,7 +115,7 @@
         <div class="controller">
             <h:form>
                 <h:commandButton value="Отчистить" styleClass="clearButton button"
-                             action="#{FormBean.clearTable}" id="clearButton"/>
+                             action="#{TableBean.clearTable}" id="clearButton"/>
             </h:form>
         </div>
 

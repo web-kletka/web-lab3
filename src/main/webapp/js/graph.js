@@ -33,7 +33,7 @@ checkboxes.forEach(checkbox => {
         let result = parseInt(decimalWithComplement(res))
         console.log("DEC: " + result)
         if (result <= 5 && result >= -5) {
-            resChecks.textContent = result
+            resChecks.textContent = result.toString()
             document.getElementById("myform:r").value = result;
             drawGraphic(result * 25)
             console.log("OK")

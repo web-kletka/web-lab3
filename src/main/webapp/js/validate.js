@@ -45,9 +45,9 @@ validate = (params) => {
 
 
 function validateForm() {
-    formData = new FormData(document.getElementById("myform"))
+    let formData = new FormData(document.getElementById("myform"))
     console.log(formData)
-    params = new URLSearchParams(formData);
+    let params = new URLSearchParams(formData);
     console.log(params.toString())
     if (!validate(params)) {
         console.log("Отменить отправку формы")

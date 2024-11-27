@@ -1,50 +1,46 @@
 package com.example.beans;
 
+import com.example.services.CheckerModelService;
+import com.example.services.EntityModelService;
 import com.example.services.ParsParamsService;
 import com.example.data.common.customException.ValidException;
 import com.example.data.models.MyEntityModel;
 import jakarta.enterprise.context.SessionScoped;
 import jakarta.inject.Named;
+import lombok.Getter;
+import lombok.Setter;
+
 import java.io.Serializable;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
+import java.util.Objects;
 
 @Named("CheckerBean")
 @SessionScoped
 public class CheckerBean implements Serializable {
 
-    long startTime;
-    String result;
-    boolean resultOfCalc = false;
+    @Getter
+    @Setter
+    private String result = "Не было точек на обработку";
 
-    public MyEntityModel getModel(String x, String y, String r) {
-        startTime = System.currentTimeMillis();
+    private final EntityModelService entityModelService = new EntityModelService();
+    private final CheckerModelService checkerModelService = new CheckerModelService();
+    private final ParsParamsService parsParamsService = new ParsParamsService();
+
+    public void check(String x, String y, String r) {
+        long startTime = System.currentTimeMillis();
         try {
-            var parsParamsService = new ParsParamsService(new HashMap<>() {{
-                put("x", x);
-                put("y", y);
-                put("r", r);
-            }});
-            resultOfCalc = calculate(parsParamsService.getX(), parsParamsService.getY(), parsParamsService.getR());
-            return new MyEntityModel(0, parsParamsService.getX(), parsParamsService.getY(), parsParamsService.getR(), resultOfCalc, System.currentTimeMillis() - startTime, new Date(), "ok");
-        } catch (
-                ValidException e) {
+            parsParamsService.pars(x, y, r);
+            parsParamsService.validParams();
+            boolean resultOfCalc = checkerModelService.calculate(parsParamsService.getX(), parsParamsService.getY(), parsParamsService.getR());
+            MyEntityModel myEntityModel = new MyEntityModel(0, parsParamsService.getX(), parsParamsService.getY(), parsParamsService.getR(), resultOfCalc, System.currentTimeMillis() - startTime, new Date(), "ok");
+            result = myEntityModel.toString();
+            entityModelService.saveModel(myEntityModel);
+        } catch (ValidException e) {
             result = e.getMessage();
-            return new MyEntityModel(result);
         }
     }
 
-    private boolean calculate(Float x, Float y, Float r){
 
-        if (x <= 0 && y <= 0)
-            return false;
-        if ((x <= 0 && y >= 0) && x * x + y * y > (r / 2) * (r / 2))
-            return false;
-        if ((x >= 0 && y >= 0) && x > r/2 || y > r)
-            return false;
-        if ((x >= 0 && y <= 0) && x - y > r / 2)
-            return false;
-
-        return true;
-    }
 }
