@@ -12,9 +12,6 @@ import lombok.Setter;
 
 import java.io.Serializable;
 import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Objects;
 
 @Named("CheckerBean")
 @SessionScoped
@@ -41,6 +38,4 @@ public class CheckerBean implements Serializable {
             result = e.getMessage();
         }
     }
-
-
 }

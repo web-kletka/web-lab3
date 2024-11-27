@@ -1,7 +1,5 @@
 package com.example.beans;
 
-import com.example.data.models.MyEntityModel;
-import com.example.services.EntityModelService;
 import jakarta.enterprise.context.SessionScoped;
 import jakarta.faces.context.FacesContext;
 import jakarta.inject.Inject;
@@ -11,8 +9,6 @@ import lombok.Setter;
 
 import java.io.IOException;
 import java.io.Serializable;
-import java.util.List;
-import java.util.Objects;
 
 @Named("FormBean")
 @SessionScoped
@@ -23,11 +19,11 @@ public class FormBean implements Serializable {
     private String y;
     private String r;
 
-    private boolean checkbox1;
-    private boolean checkbox2;
-    private boolean checkbox3;
-    private boolean checkbox4;
-    private boolean checkbox5;
+    private boolean checkbox1; //1r
+    private boolean checkbox2; //2r
+    private boolean checkbox3; //3r
+    private boolean checkbox4; //4r
+    private boolean checkbox5; //dynamic
 
     @Inject
     private CheckerBean checkerBean;
