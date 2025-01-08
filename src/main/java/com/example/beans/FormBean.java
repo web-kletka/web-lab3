@@ -23,14 +23,14 @@ public class FormBean implements Serializable {
     private boolean checkbox2; //2r
     private boolean checkbox3; //3r
     private boolean checkbox4; //4r
-    private boolean checkbox5; //dynamic
+    private boolean checkbox5; //5r
 
     @Inject
     private CheckerBean checkerBean;
 
     public void processRequest() {
+        System.out.println("========= " + x + " : " + y + " : " + r + " ================");
         checkerBean.check(x,y,r);
-
         try {
             FacesContext.getCurrentInstance().getExternalContext().redirect("index.xhtml");
         } catch (IOException e) {

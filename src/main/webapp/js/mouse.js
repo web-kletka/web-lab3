@@ -1,28 +1,27 @@
 
-canvas.addEventListener('click', function(event) {
-    const rect = canvas.getBoundingClientRect();
+graphCanvas.addEventListener('click', event => {
+    const errorElements = ['yError', 'xError', 'rError', 'notError'];
+    errorElements.forEach(id => document.getElementById(id).textContent = '');
 
-    const mouseX = event.clientX - rect.left;
+    const radius = document.getElementById("form:hidden-r").value
+    if (!radius) {
+        document.getElementById('notError').textContent = 'Выберите значение R перед взаимодействием с графиком';
+        return;
+    }
 
-    const mouseY = event.clientY - rect.top;
+    const rect = graphCanvas.getBoundingClientRect();
+    const clickX = event.clientX - rect.left;
+    const clickY = event.clientY - rect.top;
 
-    console.log("mouse: ", mouseX, mouseX)
+    const centerX = graphCanvas.width / 2;
+    const centerY = graphCanvas.height / 2;
+    const scale = graphCanvas.width / range;
 
-    let graphX = mouseX - centerX;
-    let graphY = centerY - mouseY;
+    const graphX = Math.round((clickX - centerX) / scale);
+    const graphY = (centerY - clickY) / scale;
 
-    console.log('Координаты клика:', graphX, graphY);
+    document.getElementById("form:y").value = graphY
+    document.getElementById("form:x").value = graphX
 
-    graphX = graphX * 4 / R;
-    graphY = graphY * 4 / R;
-
-    console.log('Координаты клика:', graphX, graphY);
-
-    document.getElementById('myform:x').value = graphX.toFixed(5);
-    document.getElementById('myform:y').value = graphY.toFixed(5);
-
-    document.getElementById("myform:responseButton").click()
-
+    document.getElementById("form:check-button").click()
 });
-
-

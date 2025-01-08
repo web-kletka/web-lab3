@@ -1,60 +1,34 @@
-const result_field = document.getElementById("myform:result_field");
-
-validate = (params) => {
-    let x = params.get("myform:x");
-    let y = params.get("myform:y");
-    let r = params.get("myform:r");
-    let result = "";
-    console.log(x, y, r);
 
 
-    if (x == null) {
-        result = "ERROR: x = null";
-        console.log("ERROR: x = null");
+
+function validateForm(){
+    document.getElementById("yError").textContent = "";
+    document.getElementById("xError").textContent = "";
+    document.getElementById("rError").textContent = "";
+    document.getElementById("notError").textContent = "";
+
+    const yValue = parseFloat(document.getElementById("form:y").value.replace(',', '.'));
+    const rValue = document.getElementById("form:hidden-r").value;
+    const xValue = document.getElementById("form:x").value;
+
+    let isValid = true;
+
+    if (isNaN(yValue) || yValue < -3 || yValue > 3) {
+        document.getElementById("yError").textContent = "Введите корректное значение Y∊[-5;5]";
+        isValid = false;
     }
-    else if (y == null) {
-        result = "ERROR: y = null";
-        console.log("ERROR: y = null");
+
+    if (xValue === null || xValue < -5 || xValue > 5) {
+        document.getElementById("xError").textContent = "Укажите корректное значение X∊[-5;5]";
+        isValid = false;
     }
-    else if (y === '') {
-        result = "ERROR: y = ''";
-        console.log("ERROR: y = ''");
+    console.log(rValue)
+    if (isNaN(rValue) || Number(rValue) < 1 || Number(rValue) > 5) {
+        document.getElementById("rError").textContent = "Укажите корректное значение R∊[1;5]";
+        isValid = false;
     }
-    else if (x === '') {
-        result = "ERROR: x = ''";
-        console.log("ERROR: x = ''");
-    }
-    else if (Number.isNaN(Number(y))) {
-        result = "ERROR: y not num";
-        console.log("ERROR: y not num");
-    }
-    else if (Number.isNaN(Number(x))) {
-        result = "ERROR: x not num";
-        console.log("ERROR: x not num");
-    }
-    else if (r == null) {
-        result = "ERROR: r = null";
-    }
-    if (result === "")
-        return true;
-    else {
-        result_field.textContent = result;
-        return false;
-    }
+
+    return isValid;
 }
 
-
-function validateForm() {
-    let formData = new FormData(document.getElementById("myform"))
-    console.log(formData)
-    let params = new URLSearchParams(formData);
-    console.log(params.toString())
-    if (!validate(params)) {
-        console.log("Отменить отправку формы")
-        return false;
-    }
-
-    console.log("Если всё хорошо")
-    return true;
-}
 

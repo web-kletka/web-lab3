@@ -1,237 +1,248 @@
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-}
+/*тут покаа хз че происходит надо почистить*/
 
 body {
-    align-items: center;
-    padding: 20px;
-    background-color: #333; /* Тёмный фон контейнера */
-    min-width: 500px;
-}
-
-.header{
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    border-bottom: 1px solid #555;
-    padding-bottom: 10px;
-    margin-bottom: 20px;
-}
-.left-section{
-    display: flex;
-    align-items: center;
-}
-
-.header form{
-    width: 2em;
-    margin-right: 0.5em;
-}
-
-.exit-button{
-    width: 1.5em;
-    height: 1.5em;
-    padding: 1px;
-    text-align: center;
-    font-size: 1.1em;
-    background-color: #003366; /* Тёмно-синий цвет кнопки */
+    font-family: 'Roboto', sans-serif;
+    background: url("../giphy.webp");
+    background-size: 100%;
     color: white;
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-}
-
-h1, h2 {
-    font-size: 1.3em;
-    color: #f0f0f0;
-}
-@media (min-width: 920px) {
-    .form-container {
-        display: flex;
-        justify-content: space-around;
-        align-items: flex-start;
-        margin-bottom: 30px;
-    }
-    form {
-        display: flex;
-        justify-content: center;
-        align-content: center;
-        flex-direction: column;
-        width: 65%;
-    }
-    #resultCheckBox {
-        padding: 0;
-        margin: 5px 0 0 20px;
-    }
-}
-@media (max-width: 920px) {
-    .form-container {
-        flex-direction: column;
-        display: flex;
-        justify-content: center;
-        align-content: center;
-        text-align: center;
-        margin-bottom: 30px;
-    }
-    form {
-        order: 2;
-        display: flex;
-        flex-direction: column;
-        width: 100%;
-    }
-    .input-group{
-        flex-direction: column;
-    }
-    .graph-canvas{
-        display: flex;
-        justify-content: center;
-        order: 1;
-        width: 100%;
-    }
-    #resultCheckBox{
-        width: 100%;
-        margin: 0;
-        padding: 0;
-    }
-}
-
-
-
-.input-group {
-    display: flex;
-    justify-content: start;
-    align-content: center;
-    margin-bottom: 15px;
-}
-
-label {
-    font-size: 1.1em;
-    color: #e0e0e0;
-    margin: 5px;
-}
-
-input[type="text"] {
-    padding: 10px;
-    font-size: 1em;
-    border: 1px solid #555;
-    border-radius: 8px;
-    background-color: #444;
-    color: #f0f0f0;
-    transition: background-color 0.3s ease;
-}
-
-input[type="text"]:focus {
-    background-color: #555;
-    border-color: #003366; /* Темно-синий цвет */
-    outline: none;
-}
-
-input[type="checkbox"]{
     margin: 0;
     padding: 0;
-    height: 100%;
-    width: 20px;
 }
 
-#resultCheckBox{
-    align-content: center;
-    height: 100%;
-}
-
-.checkbox-group{
-}
-
-
-
-
-.radio-group label{
-    margin-right: 12px;
-    color: #e0e0e0;
-}
-
-button, .button{
+.exit-button, .check-button{
     padding: 10px;
+    width: 100%;
     font-size: 1.1em;
-    background-color: #003366; /* Тёмно-синий цвет кнопки */
+    border-radius: 12px;
+    background-color: rgba(0, 0, 0, 0.9);
+    box-shadow: 0 4px 12px rgb(255, 0, 234);
     color: white;
-    border: none;
-    border-radius: 8px;
     cursor: pointer;
     transition: background-color 0.3s ease;
 }
 
-button:hover, .button:hover {
-    background-color: #001f4d;
+header {
+    color: #FFFFFF;
+    padding: 24px;
+    text-align: center;
+    font-size: 24px;
+    font-weight: bold;
+    max-width: 1000px;
+    margin: auto;
 }
 
-
-.large-rectangle {
-    padding: 20px;
-    width: 100%;
-    border: 2px dashed #003366; /* Темно-синий цвет рамки */
+.container {
+    max-width: 1000px;
+    margin: auto;
+    padding: 16px;
     border-radius: 12px;
-    background-color: #333;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+    background-color: rgba(0, 0, 0, 0.9);
+    box-shadow: 0 4px 12px rgb(255, 0, 234);
 }
 
-table {
+h2 {
+    color: rgb(255, 255, 255);
+    font-size: 28px;
+    margin-bottom: 16px;
+    font-weight: bold;
+    text-align: center;
+}
+
+.graph-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 80%;
+    max-width: 500px;
+    margin: 0 auto;
+}
+
+#graphCanvas {
+    width: 100%;
+    aspect-ratio: 1 / 1;
+}
+
+.form-group {
+    margin: 16px 0;
+    display: flex;
+    flex-direction: column;
+}
+
+.form-group label {
+    margin-bottom: 8px;
+    font-size: 16px;
+    font-weight: 500;
+    color: rgb(203, 0, 183);
+}
+
+.form-group select,
+.form-group input[type="text"] {
+    width: 100%;
+    padding: 12px;
+    font-size: 16px;
+    border: 1px solid #BDBDBD;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+    box-sizing: border-box;
+    background-color: #FAFAFA;
+}
+
+.radio-group {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+}
+
+.radio-group label {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    font-size: 16px;
+    color: white;
+    cursor: pointer;
+}
+
+.radio-group input[type="radio"] {
+    appearance: none;
+    width: 24px;
+    height: 24px;
+    border: 2px solid rgb(203, 0, 183);
+    border-radius: 50%;
+    outline: none;
+    cursor: pointer;
+    position: relative;
+    transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+
+.radio-group input[type="radio"]:checked {
+    background-color: rgb(203, 0, 183);
+    border-color: rgb(203, 0, 183);
+}
+
+.radio-group input[type="radio"]::before {
+    content: "";
+    display: block;
+    width: 12px;
+    height: 12px;
+    background-color: #FFFFFF;
+    border-radius: 50%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0);
+    transition: transform 0.2s ease;
+}
+
+.radio-group input[type="radio"]:checked::before {
+    transform: translate(-50%, -50%) scale(1);
+}
+
+.form-group input:focus,
+.form-group select:focus {
+    outline: none;
+    border-color: rgb(203, 0, 183);
+    box-shadow: 0 2px 8px rgb(203, 0, 183);
+}
+
+.form-group .check-button {
+    background-color: rgb(203, 0, 183);
+    color: white;
+    padding: 12px;
+    font-size: 16px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-top: 16px;
+}
+
+.form-group .check-button:hover {
+    background-color: rgb(203, 0, 183);
+}
+
+
+span {
+    color: red;
+    font-size: 14px;
+    margin-top: 4px;
+
+}
+
+#resultsTable {
     width: 100%;
     border-collapse: collapse;
-    color: #f0f0f0;
-    height: auto;
+    margin-top: 24px;
 }
 
-thead {
-    background-color: #003366;
-    color: white;
-}
-
-th, td {
+#resultsTable th, #resultsTable td {
     padding: 12px;
-    width: 23%;
-    text-align: center;
-    border-bottom: 1px solid #555;
+    border-bottom: 1px solid #CCCCCC;
+    text-align: left;
 }
 
-tbody tr:nth-child(even) {
-    background-color: #444;
+#resultsTable th {
+    background-color: #F5F5F5;
+    color: rgb(203, 0, 183);
+    font-weight: 500;
 }
 
-tbody tr:hover {
-    background-color: #555;
+.checkbox-group {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
 }
 
-tbody td:first-child{
-    width: 6%;
-}
-thead th:first-child{
-    width: 6%;
-}
-
-th {
-    font-weight: bold;
-}
-
-
-.out_put_text {
+.checkbox-group label {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    font-size: 16px;
     color: white;
-    padding: 10px;
-    text-align: center;
+    cursor: pointer;
 }
 
-.clearButton{
-    width: 10em;
+.checkbox-group input[type="checkbox"] {
+    appearance: none;
+    width: 24px;
+    height: 24px;
+    border: 2px solid rgb(203, 0, 183);
+    border-radius: 4px; /* Квадратная форма с небольшим радиусом */
+    outline: none;
+    cursor: pointer;
+    position: relative;
+    transition: background-color 0.3s ease, border-color 0.3s ease;
 }
 
-.controller {
-    height: 5%;
-    width: 100%;
-    display: grid;
-    margin-top: 1em;
-    justify-content: end;
+.checkbox-group input[type="checkbox"]:checked {
+    background-color: rgb(203, 0, 183);
+    border-color: rgb(203, 0, 183);
 }
 
+.checkbox-group input[type="checkbox"]::before {
+    content: "";
+    display: block;
+    width: 12px;
+    height: 12px;
+    background-color: #FFFFFF;
+    border-radius: 2px; /* Квадратная форма с небольшим радиусом */
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0);
+    transition: transform 0.2s ease;
+}
 
+.checkbox-group input[type="checkbox"]:checked::before {
+    transform: translate(-50%, -50%) scale(1);
+}
+
+canvas {
+    border: 1px solid white;
+    margin-top: 20px;
+}

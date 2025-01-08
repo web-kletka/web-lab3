@@ -9,7 +9,7 @@ import java.util.Date;
 
 @Getter
 @Entity
-@Table(name = "PointsResults")
+@Table(name = "PointsResultsPollee")
 @NoArgsConstructor
 @AllArgsConstructor
 public class MyEntityModel {

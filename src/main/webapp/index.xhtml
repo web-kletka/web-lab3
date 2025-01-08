@@ -2,125 +2,113 @@
 
 <!DOCTYPE html>
 <html
-        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:f="https://jakarta.ee/xml/ns/jakartaee"
         xsi:schemaLocation="http://xmlns.jcp.org/jsf/html"
         xmlns="http://www.w3.org/1999/xhtml"
         xmlns:h="http://xmlns.jcp.org/jsf/html"
         xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
 
+<h:head>
+    <title>Лаб 3 (помогатор)</title>
+    <link rel="stylesheet" href="style/index.css"/>
+</h:head>
 
-    <h:head>
-        <title>Лаба 3</title>
-        <link rel="stylesheet" href="style/index.css"/>
-        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet"/>
-    </h:head>
-    <h:body>
-        <div class="header" style="font-family: fantasy">
-            <div class="left-section">
-                <h:form>
-                    <h:commandButton class="exit-button" value="&lt;" action="main"/>
-                </h:form>
-                <h1>Захарченко Роман Владимирович</h1>
-            </div>
-            <div>
-                <h2>Группа Р3231 / Вариант 666</h2>
-            </div>
+<h:body>
+    <header>
+        Соколова Полина Дмитриевна<br/>
+        P3215<br/>
+        Вариант: 1337<br/>
+        <h:form>
+            <h:commandButton class="exit-button" value="вернуться на главную страницу" action = "main"/>
+        </h:form>
+    </header>
+
+    <div class="container">
+        <h2>Проверить точки</h2>
+
+        <div class="graph-container">
+            <script>
+                let points = [];
+            </script>
+            <ui:repeat value="#{TableBean.requestHistory}" var="entry">
+                <script>
+                    // Добавляем объект с данными в массив points
+                    points.push({x: #{entry.x}, y: #{entry.y}, color: '#{entry.result ? "green" : "red"}'});
+                </script>
+            </ui:repeat>
+            <script>
+                console.log("points", points); // Здесь вы можете использовать points
+            </script>
+            <canvas id="graphCanvas" width="250" height="250"/>
+        </div>
+        <div>
+            <span class="error" id="notError"/>
         </div>
 
-        <div class="form-container">
-            <h:form class="myform" id="myform" onsubmit="return validateForm()">
-                <input type="hidden" name="action" value="areaCheck"/>
-                <!-- Поля формы (оставляем как есть) -->
-                <div class="input-group">
-                    <label>Изменение X:</label>
-                    <h:inputText value="#{FormBean.x}" styleClass="textField" id="x" name="x" placeholder="-4 ... 4"/>
-                </div>
-
-                <div class="input-group">
-                    <label>Изменение Y:</label>
-                    <h:inputText value="#{FormBean.y}" styleClass="textField" id="y" name="y" placeholder="-4 ... 4"/>
-                </div>
-
-                <div class="input-group">
-                    <label>Изменение R:</label>
-                    <div class="checkbox-group">
-                        <label><h:selectBooleanCheckbox type="checkbox" name="r" value="#{FormBean.checkbox1}" class="checkR"/></label>
-                        <label><h:selectBooleanCheckbox type="checkbox" name="r" value="#{FormBean.checkbox2}" class="checkR"/></label>
-                        <label><h:selectBooleanCheckbox id="checkbox3" type="checkbox" name="r" value="#{FormBean.checkbox3}" class="checkR"/></label>
-                        <label><h:selectBooleanCheckbox type="checkbox" name="r" value="#{FormBean.checkbox4}" class="checkR"/></label>
-                    </div>
-                    <label id="resultCheckBox">0</label>
-
-
-                    <h:inputHidden id="r" value="#{FormBean.r}" />
-                </div>
-                <div class="input-group">
-                    <label>Динамичная проверка: </label>
-                    <div class="checkbox-group">
-                        <label><h:selectBooleanCheckbox type="checkbox" name="dynamic_check_box" value="#{FormBean.checkbox5}" class="check_dynamic"/></label>
-                    </div>
-                </div>
-                <h:commandButton value="Отправить" styleClass="button"
-                                 action="#{FormBean.processRequest}" id="responseButton"/>
-                <div id="out_put_text" class="out_put_text" >
-                    <h:outputText id = "result_field" value="#{CheckerBean.result}"/>
-                </div>
-            </h:form>
-
-            <!-- Canvas для отрисовки фигуры -->
-
-
-
-            <div class="graph-canvas">
-                <script>
-                    let points = [];
-                </script>
-                <ui:repeat value="#{TableBean.requestHistory}" var="entry">
-                    <script>
-                        // Добавляем объект с данными в массив points
-                        points.push({x: #{entry.x}, y: #{entry.y}, color: '#{entry.result ? "green" : "red"}'});
-                    </script>
-                </ui:repeat>
-                <script>
-                    console.log("points", points); // Здесь вы можете использовать points
-                </script>
-                <canvas id="graphCanvas" width="300" height="300"/>
+        <h:form id="form" onsubmit="return validateForm()">
+            <div class="form-group">
+                <label>Выберите X:</label>
+                <h:inputText value="#{FormBean.x}" id="x" type="number" min="-5" max="5" step="1" />
+                <span class="error" id="xError"/>
             </div>
 
+            <div class="form-group">
+                <label>Введите Y:</label>
+                <h:inputText value="#{FormBean.y}" id="y" />
+                <h:message for="y" styleClass="error"/>
+                <span class="error" id="yError"/>
+            </div>
 
-        </div>
+            <div class="form-group">
+                <label>Введите R:</label>
+                <div class="checkbox-group">
+                    <label><h:selectBooleanCheckbox type="checkbox" name="r" value="#{FormBean.checkbox1}" class="check-box-r"/>1</label>
+                    <label><h:selectBooleanCheckbox type="checkbox" name="r" value="#{FormBean.checkbox2}" class="check-box-r"/>2</label>
+                    <label><h:selectBooleanCheckbox type="checkbox" name="r" value="#{FormBean.checkbox3}" class="check-box-r"/>3</label>
+                    <label><h:selectBooleanCheckbox type="checkbox" name="r" value="#{FormBean.checkbox4}" class="check-box-r"/>4</label>
+                    <label><h:selectBooleanCheckbox type="checkbox" name="r" value="#{FormBean.checkbox5}" class="check-box-r"/>5</label>
+                </div>
 
-        <div class="large-rectangle">
-            <table>
-                <thead>
+                <h:inputHidden id="hidden-r" value="#{FormBean.r}"/>
+
+                <span class="error" id="rError"/>
+            </div>
+
+            <h:commandButton value="Проверить" action="#{FormBean.processRequest}" class="check-button" id="check-button"/>
+
+        </h:form>
+
+
+        <h3>Таблица результатов</h3>
+        <table id="resultsTable">
+            <thead>
+            <tr>
+                <th>X</th>
+                <th>Y</th>
+                <th>R</th>
+                <th>Результат</th>
+                <th>Время реальное</th>
+                <th>Время работы скрипта (мс)</th>
+            </tr>
+            </thead>
+            <tbody>
+            <ui:repeat value="#{TableBean.requestHistory}" var="entry">
                 <tr>
-                    <th>X, Y, R</th>
-                    <th>Результат</th>
-                    <th>Время реальное</th>
-                    <th>Время работы скрипта (мс)</th>
+                    <td><h:outputText value="#{entry.x}"/></td>
+                    <td><h:outputText value="#{entry.y}"/></td>
+                    <td><h:outputText value="#{entry.r}"/></td>
+                    <td><h:outputText value="#{entry.result}"/></td>
+                    <td><h:outputText value="#{entry.date}"/></td>
+                    <td><h:outputText value="#{entry.time}"/></td>
                 </tr>
-                </thead>
-                <tbody id="myTBody">
-                <ui:repeat value="#{TableBean.requestHistory}" var="entry">
-                    <tr>
-                        <td class="th"><h:outputText value="#{entry.xyr}"/></td>
-                        <td class="th"><h:outputText value="#{entry.result}"/></td>
-                        <td class="th"><h:outputText value="#{entry.date}"/></td>
-                        <td class="th"><h:outputText value="#{entry.time}"/></td>
-                    </tr>
-                </ui:repeat>
-                </tbody>
-            </table>
-        </div>
-        <div class="controller">
-            <h:form>
-                <h:commandButton value="Отчистить" styleClass="clearButton button"
-                             action="#{TableBean.clearTable}" id="clearButton"/>
-            </h:form>
-        </div>
+            </ui:repeat>
+            </tbody>
+        </table>
+    </div>
 
-        <script src="js/validate.js"/>
-        <script src="js/graph.js"/>
-        <script src="js/mouse.js"/>
-    </h:body>
+    <script src="js/validate.js"/>
+    <script src="js/graph.js"/>
+    <script src="js/mouse.js"/>
+
+</h:body>
 </html>
