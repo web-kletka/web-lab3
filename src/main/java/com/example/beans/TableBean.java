@@ -1,6 +1,6 @@
 package com.example.beans;
 
-import com.example.data.models.MyEntityModel;
+import com.example.entities.PointEntity;
 import com.example.services.EntityModelService;
 import jakarta.enterprise.context.SessionScoped;
 import jakarta.faces.context.FacesContext;
@@ -29,7 +29,7 @@ public class TableBean implements Serializable {
         }
     }
 
-    public List<MyEntityModel> getRequestHistory() {
+    public List<PointEntity> getRequestHistory() {
         return entityModelService.findAllUsers();
     }
 }

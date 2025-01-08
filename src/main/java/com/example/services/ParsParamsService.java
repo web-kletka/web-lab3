@@ -10,7 +10,7 @@ public class ParsParamsService {
     private Float y = null;
     private Float r = null;
 
-    public ParsParamsService(){
+    public ParsParamsService() {
     }
 
     public void pars(String x, String y, String r) {
@@ -22,18 +22,27 @@ public class ParsParamsService {
     }
 
 
-    private void pars(HashMap<String, String> map){
+    private void pars(HashMap<String, String> map) {
 
         for (String key : map.keySet()) {
             switch (key) {
-                case "x" -> x = Float.parseFloat(map.get(key));
-                case "y" -> y = Float.parseFloat(map.get(key));
-                case "r" -> r = Float.parseFloat(map.get(key));
+                case "x": {
+                    x = Float.parseFloat(map.get(key));
+                    break;
+                }
+                case "y": {
+                    y = Float.parseFloat(map.get(key));
+                    break;
+                }
+                case "r": {
+                    r = Float.parseFloat(map.get(key));
+                    break;
+                }
             }
         }
     }
 
-    public void validParams() throws IllegalArgumentException{
+    public void validParams() throws IllegalArgumentException {
         if (x == null) throw new IllegalArgumentException("x is empty");
         if (y == null) throw new IllegalArgumentException("y is empty");
         if (r == null) throw new IllegalArgumentException("r is empty");

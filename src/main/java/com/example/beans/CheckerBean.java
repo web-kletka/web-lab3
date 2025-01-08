@@ -1,10 +1,9 @@
 package com.example.beans;
 
+import com.example.entities.PointEntity;
 import com.example.services.CheckerModelService;
 import com.example.services.EntityModelService;
 import com.example.services.ParsParamsService;
-import com.example.data.common.customException.ValidException;
-import com.example.data.models.MyEntityModel;
 import jakarta.enterprise.context.SessionScoped;
 import jakarta.inject.Named;
 import lombok.Getter;
@@ -31,10 +30,10 @@ public class CheckerBean implements Serializable {
             parsParamsService.pars(x, y, r);
             parsParamsService.validParams();
             boolean resultOfCalc = checkerModelService.calculate(parsParamsService.getX(), parsParamsService.getY(), parsParamsService.getR());
-            MyEntityModel myEntityModel = new MyEntityModel(0, parsParamsService.getX(), parsParamsService.getY(), parsParamsService.getR(), resultOfCalc, System.currentTimeMillis() - startTime, new Date(), "ok");
+            PointEntity myEntityModel = new PointEntity(0L, parsParamsService.getX(), parsParamsService.getY(), parsParamsService.getR(), resultOfCalc, System.currentTimeMillis() - startTime, new Date());
             result = myEntityModel.toString();
             entityModelService.saveModel(myEntityModel);
-        } catch (ValidException e) {
+        } catch (IllegalArgumentException e) {
             result = e.getMessage();
         }
     }
