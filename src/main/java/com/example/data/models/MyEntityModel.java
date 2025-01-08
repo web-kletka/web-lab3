@@ -22,6 +22,9 @@ public class MyEntityModel {
     @Column(name = "y", nullable = false)
     private Float y;
 
+    @Column(name = "z", nullable = false)
+    private Float z;
+
     @Column(name = "r", nullable = false)
     private Float r;
 
@@ -42,8 +45,8 @@ public class MyEntityModel {
         this.info = info;
     }
 
-    public String getXyr(){
-        return x + "," + y + "," + r;
+    public String getXyzr(){
+        return x + "," + y + "," + z +"," + r ;
     }
 
 

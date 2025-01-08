@@ -25,13 +25,13 @@ public class CheckerBean implements Serializable {
     private final CheckerModelService checkerModelService = new CheckerModelService();
     private final ParsParamsService parsParamsService = new ParsParamsService();
 
-    public void check(String x, String y, String r) {
+    public void check(String x, String y, String z, String r) {
         long startTime = System.currentTimeMillis();
         try {
-            parsParamsService.pars(x, y, r);
+            parsParamsService.pars(x, y, z, r);
             parsParamsService.validParams();
-            boolean resultOfCalc = checkerModelService.calculate(parsParamsService.getX(), parsParamsService.getY(), parsParamsService.getR());
-            MyEntityModel myEntityModel = new MyEntityModel(0, parsParamsService.getX(), parsParamsService.getY(), parsParamsService.getR(), resultOfCalc, System.currentTimeMillis() - startTime, new Date(), "ok");
+            boolean resultOfCalc = checkerModelService.calculate(parsParamsService.getX(), parsParamsService.getY(), parsParamsService.getZ(), parsParamsService.getR());
+            MyEntityModel myEntityModel = new MyEntityModel(0, parsParamsService.getX(), parsParamsService.getY(), parsParamsService.getZ(), parsParamsService.getR(), resultOfCalc, System.currentTimeMillis() - startTime, new Date(), "ok");
             result = myEntityModel.toString();
             entityModelService.saveModel(myEntityModel);
         } catch (ValidException e) {

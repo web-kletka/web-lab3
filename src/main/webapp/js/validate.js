@@ -53,7 +53,6 @@ function validateForm() {
         console.log("Отменить отправку формы")
         return false;
     }
-
     console.log("Если всё хорошо")
     return true;
 }

@@ -1,17 +1,9 @@
 package com.example.services;
 
+import jakarta.annotation.ManagedBean;
+
 public class CheckerModelService {
-    public boolean calculate(Float x, Float y, Float r){
-
-        if (x <= 0 && y <= 0)
-            return false;
-        if ((x <= 0 && y >= 0) && x * x + y * y > (r / 2) * (r / 2))
-            return false;
-        if ((x >= 0 && y >= 0) && x > r/2 || y > r)
-            return false;
-        if ((x >= 0 && y <= 0) && x - y > r / 2)
-            return false;
-
-        return true;
+    public boolean calculate(Float x, Float y, Float z, Float r){
+        return !(x * x + y * y + z * z + Math.sin(4 * x) + Math.sin(4 * y) + Math.sin(4 * z) > r);
     }
 }

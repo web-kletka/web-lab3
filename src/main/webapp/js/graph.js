@@ -1,13 +1,29 @@
 const canvas = document.getElementById('graphCanvas');
-const ctx = canvas.getContext('2d');
-
-const R = 100;
-const centerX = canvas.width / 2;
-const centerY = canvas.height / 2;
 
 const checkboxes = document.querySelectorAll(".checkR");
 const resChecks = document.getElementById("resultCheckBox");
 const dynamic_checked = document.querySelectorAll(".check_dynamic").item(0);
+
+const scene = new THREE.Scene();
+const camera = new THREE.PerspectiveCamera(75, canvas.width / canvas.height, 0.1, 1000);
+const renderer = new THREE.WebGLRenderer({ canvas: canvas });
+renderer.setSize(canvas.width, canvas.height);
+
+// Установка однотонного фона (например, темно-серого цвета)
+scene.background = new THREE.Color(0x333333);
+
+// Управление камерой
+const controls = new THREE.OrbitControls(camera, renderer.domElement);
+controls.enableDamping = true;
+controls.dampingFactor = 0.05;
+
+
+
+// Настройка камеры
+camera.position.set(4, 4, 4);
+camera.lookAt(0, 0, 0);
+
+animate();
 
 function decimalWithComplement(code) {
     let num = parseInt(code, 2);
@@ -35,7 +51,7 @@ checkboxes.forEach(checkbox => {
         if (result <= 5 && result >= -5) {
             resChecks.textContent = result.toString()
             document.getElementById("myform:r").value = result;
-            drawGraphic(result * 25)
+            drawGraphic(result)
             console.log("OK")
         }
         else {
@@ -59,112 +75,93 @@ window.addEventListener('load', () => {
 });
 
 function drawGraphic(r){
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-    ctx.fillStyle = '#003366';
-    ctx.fillRect(centerX, centerY - r, r / 2, r);
+    scene.clear()
+    // Создание осей
+    const axisX = createAxis(0xf0f0f0, new THREE.Vector3(-5, 0, 0), new THREE.Vector3(5, 0, 0)); // Красная ось X
+    const axisY = createAxis(0xf0f0f0, new THREE.Vector3(0, -5, 0), new THREE.Vector3(0, 5, 0)); // Зеленая ось Y
+    const axisZ = createAxis(0xf0f0f0, new THREE.Vector3(0, 0, -5), new THREE.Vector3(0, 0, 5)); // Синяя ось Z
 
-    ctx.beginPath();
-    ctx.moveTo(centerX, centerY);
-    ctx.lineTo(centerX + r / 2, centerY);
-    ctx.lineTo(centerX, centerY + r / 2);
-    ctx.closePath();
-    ctx.fill();
+    // Добавление осей на сцену
+    scene.add(axisX);
+    scene.add(axisY);
+    scene.add(axisZ);
 
-    ctx.beginPath();
-    ctx.moveTo(centerX, centerY);
-    ctx.arc(centerX, centerY, Math.abs(r) / 2, (r < 0 ? 0 : 1) * Math.PI, r / Math.abs(r) * 1.5 * Math.PI, false);
-    ctx.closePath();
-    ctx.fill();
+    // Параметры сетки
+    const size = 5.5; // Границы поиска (от -size до size)
+    const step = 0.07; // Шаг поиска
+    const threshold = 0.3; // Точность попадания
 
-    ctx.beginPath();
-    ctx.moveTo(centerX, 0);
-    ctx.lineTo(centerX, canvas.height);
-    ctx.moveTo(centerX, 0);
-    ctx.lineTo(centerX + 5, 5);
-    ctx.moveTo(centerX, 0);
-    ctx.lineTo(centerX - 5, 5);
+    // Уравнение поверхности
+    const implicitFunction = (x, y, z) => {
+        return x ** 2 + y ** 2 + z ** 2 + Math.sin(4 * x) + Math.sin(4 * y) + Math.sin(4 * z) - r;
+    };
 
-    ctx.moveTo(0, centerY);
-    ctx.lineTo(canvas.width, centerY);
-    ctx.moveTo(canvas.width, centerY);
-    ctx.lineTo(canvas.width - 5, centerY - 5)
-    ctx.moveTo(canvas.width, centerY);
-    ctx.lineTo(canvas.width - 5, centerY + 5)
+    // Создание точек поверхности
+    const vertices = [];
+    for (let x = -size; x <= size; x += step) {
+        for (let y = -size; y <= size; y += step) {
+            for (let z = -size; z <= size; z += step) {
+                const value = implicitFunction(x, y, z);
+                if (Math.abs(value) < threshold) {
+                    vertices.push(new THREE.Vector3(x, y, z));
+                }
+            }
+        }
+    }
 
-    ctx.strokeStyle = 'white';
-    ctx.stroke();
-
-    ctx.fillStyle = 'white';
-    ctx.font = '14px Arial';
-
-    ctx.fillText('-1', centerX - R / 4 , centerY - 5);
-    ctx.fillText('-2', centerX - R / 2, centerY - 5);
-    ctx.fillText('-3', centerX - R / 4 * 3, centerY - 5);
-    ctx.fillText('-4', centerX - R, centerY - 5);
-    ctx.fillText('-5', centerX - (R + R / 4), centerY - 5);
+    // Генерация точек
+    const geometry = new THREE.BufferGeometry().setFromPoints(vertices);
+    const material = new THREE.PointsMaterial({ color: 0x003366, size: 0.05 });
+    const points = new THREE.Points(geometry, material);
+    scene.add(points);
 
 
-    ctx.fillText('1', centerX + R / 4 , centerY - 5);
-    ctx.fillText('2', centerX + R / 2, centerY - 5);
-    ctx.fillText('3', centerX + R / 4 * 3, centerY - 5);
-    ctx.fillText('4', centerX + R, centerY - 5);
-    ctx.fillText('5', centerX + (R + R / 4), centerY - 5);
-
-    ctx.fillText('x', canvas.width - 7, centerY - 10);
-
-    ctx.fillText('-1', centerX + 5, centerY + R / 4);
-    ctx.fillText('-2', centerX + 5, centerY + R / 2);
-    ctx.fillText('-3', centerX + 5, centerY + R / 4 * 3);
-    ctx.fillText('-4', centerX + 5, centerY + R);
-    ctx.fillText('-5', centerX + 5, centerY + (R + R / 4));
-
-    ctx.fillText('1', centerX + 5, centerY - R / 4);
-    ctx.fillText('2', centerX + 5, centerY - R / 2);
-    ctx.fillText('3', centerX + 5, centerY - R / 4 * 3);
-    ctx.fillText('4', centerX + 5, centerY - R);
-    ctx.fillText('5', centerX + 5, centerY - (R + R / 4));
-
-    ctx.fillText('y', centerX + 10,  7);
+    // Луч для обработки кликов
+    const raycaster = new THREE.Raycaster();
 
     isDynamicChecked()
+
 }
 
 function isDynamicChecked(){
     if (dynamic_checked.checked) {
         points.forEach(point => {
-            drawPoint(point.x, point.y, getColor(point.x, point.y, Number(resChecks.textContent)) ? "green" : "red");
+            drawPoint(point.x, point.y, point.z,getColor(point.x, point.y, point.z, Number(resChecks.textContent)) ? "green" : "red");
         });
     }
     else{
         points.forEach(point => {
-            drawPoint(point.x, point.y, point.color);
+            drawPoint(point.x, point.y, point.z, point.color);
         });
     }
 }
 
-function drawPoint(graphX, graphY, color){
 
-    console.log("draw POINT1", graphX, graphY, color, R)
-    ctx.beginPath();
-    ctx.strokeStyle = color;
-    ctx.fillStyle = color;
-    console.log("center", centerX, centerY, color)
-
-    let x = centerX + graphX * R / 4;
-    let y = centerY - graphY * R / 4;
-
-    console.log("draw POINT2", x, y, color)
-
-    ctx.arc(x, y,2,0, 2 * Math.PI);
-    ctx.fill();
-    ctx.stroke();
+function getColor(x, y, z, r){
+    return x**2+y**2+z**2+Math.sin(4*x)+Math.sin(4*y)+Math.sin(4*z)<=r;
 }
 
-function getColor(x, y, r){
-    let a = (Math.sign(r) * x > 0) && (Math.sign(r) * y > 0) && (Math.sign(r) * x <Math.sign(r) *  r / 2) && (Math.sign(r) * y < Math.sign(r) *  r);
-    let b = (Math.sign(r) * x > 0) && (Math.sign(r) * y < 0) && (Math.sign(r) * y > Math.sign(r) * x - Math.abs(r) / 2);
-    let c = (Math.sign(r) * x < 0) && (Math.sign(r) * y > 0) && ((r / 2) ** 2 > x ** 2 + y ** 2);
-    return a || b || c;
+// Функция для создания осей
+function createAxis(color, start, end) {
+    const geometry = new THREE.BufferGeometry().setFromPoints([start, end]);
+    const material = new THREE.LineBasicMaterial({ color: color });
+    const axis = new THREE.Line(geometry, material);
+    return axis;
 }
+// Функция для добавления точки
+function drawPoint(x, y, z, color) {
+    const geometry = new THREE.SphereGeometry(0.05, 32, 32);
+    const material = new THREE.MeshBasicMaterial({color: color});
+    const point = new THREE.Mesh(geometry, material);
+    point.position.set(x, y, z);
+    scene.add(point);
+}
+
+function animate() {
+    requestAnimationFrame(animate);
+    controls.update(); // Обновление OrbitControls
+    renderer.render(scene, camera);
+}
+
 

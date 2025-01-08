@@ -17,6 +17,7 @@ import java.io.Serializable;
 public class FormBean implements Serializable {
     private String x;
     private String y;
+    private String z;
     private String r;
 
     private boolean checkbox1; //1r
@@ -29,7 +30,7 @@ public class FormBean implements Serializable {
     private CheckerBean checkerBean;
 
     public void processRequest() {
-        checkerBean.check(x,y,r);
+        checkerBean.check(x,y,z,r);
 
         try {
             FacesContext.getCurrentInstance().getExternalContext().redirect("index.xhtml");

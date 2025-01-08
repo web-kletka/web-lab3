@@ -13,8 +13,12 @@
         <title>Лаба 3</title>
         <link rel="stylesheet" href="style/index.css"/>
         <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet"/>
+        <script src="https://cdn.jsdelivr.net/npm/three@latest/build/three.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/three/examples/js/controls/OrbitControls.js"></script>
     </h:head>
     <h:body>
+
+
         <div class="header" style="font-family: fantasy">
             <div class="left-section">
                 <h:form>
@@ -33,12 +37,17 @@
                 <!-- Поля формы (оставляем как есть) -->
                 <div class="input-group">
                     <label>Изменение X:</label>
-                    <h:inputText value="#{FormBean.x}" styleClass="textField" id="x" name="x" placeholder="-4 ... 4"/>
+                    <h:inputText value="#{FormBean.x}" styleClass="textField" id="x" name="x" placeholder="-3 ... 3"/>
                 </div>
 
                 <div class="input-group">
                     <label>Изменение Y:</label>
                     <h:inputText value="#{FormBean.y}" styleClass="textField" id="y" name="y" placeholder="-4 ... 4"/>
+                </div>
+
+                <div class="input-group">
+                    <label>Изменение Y:</label>
+                    <h:inputText value="#{FormBean.z}" styleClass="textField" id="z" name="z" placeholder="-4 ... 4"/>
                 </div>
 
                 <div class="input-group">
@@ -69,8 +78,6 @@
 
             <!-- Canvas для отрисовки фигуры -->
 
-
-
             <div class="graph-canvas">
                 <script>
                     let points = [];
@@ -78,7 +85,7 @@
                 <ui:repeat value="#{TableBean.requestHistory}" var="entry">
                     <script>
                         // Добавляем объект с данными в массив points
-                        points.push({x: #{entry.x}, y: #{entry.y}, color: '#{entry.result ? "green" : "red"}'});
+                        points.push({x: #{entry.x}, y: #{entry.y}, z: #{entry.z},  color: '#{entry.result ? "green" : "red"}'});
                     </script>
                 </ui:repeat>
                 <script>
@@ -103,7 +110,7 @@
                 <tbody id="myTBody">
                 <ui:repeat value="#{TableBean.requestHistory}" var="entry">
                     <tr>
-                        <td class="th"><h:outputText value="#{entry.xyr}"/></td>
+                        <td class="th"><h:outputText value="#{entry.xyzr}"/></td>
                         <td class="th"><h:outputText value="#{entry.result}"/></td>
                         <td class="th"><h:outputText value="#{entry.date}"/></td>
                         <td class="th"><h:outputText value="#{entry.time}"/></td>
