@@ -1,8 +1,8 @@
-/home/yura/Applications/intellij/ideaProjects/web_temp/web-lab3/src/main/java/com/example/services/ParsParamsService.java
-/home/yura/Applications/intellij/ideaProjects/web_temp/web-lab3/src/main/java/com/example/daos/PointsDAO.java
-/home/yura/Applications/intellij/ideaProjects/web_temp/web-lab3/src/main/java/com/example/services/CheckerModelService.java
-/home/yura/Applications/intellij/ideaProjects/web_temp/web-lab3/src/main/java/com/example/beans/CheckerBean.java
-/home/yura/Applications/intellij/ideaProjects/web_temp/web-lab3/src/main/java/com/example/entities/PointEntity.java
-/home/yura/Applications/intellij/ideaProjects/web_temp/web-lab3/src/main/java/com/example/beans/TableBean.java
-/home/yura/Applications/intellij/ideaProjects/web_temp/web-lab3/src/main/java/com/example/beans/FormBean.java
-/home/yura/Applications/intellij/ideaProjects/web_temp/web-lab3/src/main/java/com/example/services/EntityModelService.java
+/media/ra/_work/ra/ITMO/WEB/web-lab3/src/main/java/com/example/services/CheckerModelService.java
+/media/ra/_work/ra/ITMO/WEB/web-lab3/src/main/java/com/example/beans/CheckerBean.java
+/media/ra/_work/ra/ITMO/WEB/web-lab3/src/main/java/com/example/daos/PointsDAO.java
+/media/ra/_work/ra/ITMO/WEB/web-lab3/src/main/java/com/example/services/EntityModelService.java
+/media/ra/_work/ra/ITMO/WEB/web-lab3/src/main/java/com/example/beans/TableBean.java
+/media/ra/_work/ra/ITMO/WEB/web-lab3/src/main/java/com/example/entities/PointEntity.java
+/media/ra/_work/ra/ITMO/WEB/web-lab3/src/main/java/com/example/beans/FormBean.java
+/media/ra/_work/ra/ITMO/WEB/web-lab3/src/main/java/com/example/services/ParsParamsService.java

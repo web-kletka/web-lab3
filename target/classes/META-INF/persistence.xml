@@ -7,9 +7,9 @@
     <persistence-unit name="PERSISTENCE">
         <class>com.example.entities.PointEntity</class>
         <properties>
-            <property name="jakarta.persistence.jdbc.url" value="jdbc:postgresql://localhost:5432/some_ones_lab" />
-            <property name="jakarta.persistence.jdbc.user" value="some_ones_lab_host" />
-            <property name="jakarta.persistence.jdbc.password" value="12345678" />
+            <property name="jakarta.persistence.jdbc.url" value="jdbc:postgresql://localhost:5432/web_lab3_db" />
+            <property name="jakarta.persistence.jdbc.user" value="host" />
+            <property name="jakarta.persistence.jdbc.password" value="1122" />
             <property name="jakarta.persistence.jdbc.driver" value="org.postgresql.Driver" />
             <property name="eclipselink.logging.level" value="FINE" />
             <property name="eclipselink.ddl-generation" value="create-or-extend-tables" />

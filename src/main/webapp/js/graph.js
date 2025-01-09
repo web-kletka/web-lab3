@@ -7,7 +7,6 @@ checkboxes.forEach((checkbox, index) => {
     checkbox.checked = false;
     console.log((index + 1) + " : " + hiddenInput.value);
 
-    // Устанавливаем изначальное значение, если совпадает с hidden-r
     if (index + 1 === Number(hiddenInput.value)) {
         checkbox.checked = true;
         console.log("OK");

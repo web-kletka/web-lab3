@@ -1,6 +1,4 @@
 
-
-
 function validateForm(){
     document.getElementById("yError").textContent = "";
     document.getElementById("xError").textContent = "";
