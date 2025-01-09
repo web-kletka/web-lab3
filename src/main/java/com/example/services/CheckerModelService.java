@@ -1,6 +1,7 @@
 package com.example.services;
 
 public class CheckerModelService {
+    //TODO change point checking equasion
     public boolean calculate(Float x, Float y, Float r){
 
         if (x <= 0 && y <= 0)

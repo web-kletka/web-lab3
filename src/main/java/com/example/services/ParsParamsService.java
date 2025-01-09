@@ -1,7 +1,6 @@
 package com.example.services;
 
 import lombok.Getter;
-import com.example.data.common.customException.ValidException;
 
 import java.util.HashMap;
 
@@ -14,7 +13,7 @@ public class ParsParamsService {
     public ParsParamsService(){
     }
 
-    public void pars(String x, String y, String r) throws ValidException  {
+    public void pars(String x, String y, String r) {
         pars(new HashMap<>() {{
             put("x", x);
             put("y", y);
@@ -34,13 +33,13 @@ public class ParsParamsService {
         }
     }
 
-    public void validParams() throws ValidException{
-        if (x == null) throw new ValidException("x is empty");
-        if (y == null) throw new ValidException("y is empty");
-        if (r == null) throw new ValidException("r is empty");
-        if (-4.0 > x || x > 4.0) throw new ValidException("x must be between -4 and 4");
-        if (-3.0 > y || y > 3.0) throw new ValidException("y must be between -3 and 3");
-        if (1 > r || r > 5) throw new ValidException("r must be between 1 and 5");
+    public void validParams() throws IllegalArgumentException{
+        if (x == null) throw new IllegalArgumentException("x is empty");
+        if (y == null) throw new IllegalArgumentException("y is empty");
+        if (r == null) throw new IllegalArgumentException("r is empty");
+        if (-4.0 > x || x > 4.0) throw new IllegalArgumentException("x must be between -4 and 4");
+        if (-3.0 > y || y > 3.0) throw new IllegalArgumentException("y must be between -3 and 3");
+        if (1 > r || r > 5) throw new IllegalArgumentException("r must be between 1 and 5");
     }
 
 }

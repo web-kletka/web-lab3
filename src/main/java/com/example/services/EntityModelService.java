@@ -1,7 +1,7 @@
 package com.example.services;
 
-import com.example.data.dao.EntityModelDao;
-import com.example.data.models.MyEntityModel;
+import com.example.daos.PointsDAO;
+import com.example.entities.PointEntity;
 import lombok.NoArgsConstructor;
 
 import java.util.List;
@@ -9,15 +9,15 @@ import java.util.List;
 @NoArgsConstructor
 public class EntityModelService {
 
-    private final EntityModelDao entityModelDao = new EntityModelDao();
+    private final PointsDAO entityModelDao = new PointsDAO("PERSISTENCE");
 
-    public void saveModel(MyEntityModel model) {
+    public void saveModel(PointEntity model) {
         entityModelDao.save(model);
     }
 
     public void clearTable(){entityModelDao.clear();}
 
-    public List<MyEntityModel> findAllUsers() {
+    public List<PointEntity> findAllUsers() {
         return entityModelDao.findAll();
     }
 

@@ -93,12 +93,7 @@
             <version>3.1.0</version>
         </dependency>
 
-        <!-- Hibernate Core -->
-        <dependency>
-            <groupId>org.hibernate.orm</groupId>
-            <artifactId>hibernate-core</artifactId>
-            <version>6.6.1.Final</version>
-        </dependency>
+
 
         <!-- PostgreSQL JDBC Driver -->
         <dependency>
@@ -114,12 +109,13 @@
             <version>3.0.2</version>
         </dependency>
 
-        <!-- Hibernate Validator -->
+        <!-- https://mvnrepository.com/artifact/org.eclipse.persistence/org.eclipse.persistence.jpa -->
         <dependency>
-            <groupId>org.hibernate.validator</groupId>
-            <artifactId>hibernate-validator</artifactId>
-            <version>8.0.1.Final</version>
+            <groupId>org.eclipse.persistence</groupId>
+            <artifactId>org.eclipse.persistence.jpa</artifactId>
+            <version>4.0.5</version>
         </dependency>
+
     </dependencies>
 
     <build>
